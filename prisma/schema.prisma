@@ -19,4 +19,6 @@ enum UserMode {
 model User {
   id        BigInt @id
   mode      UserMode @default(OPTED_OUT)
+  xp        BigInt @default(0)
+  createdAt DateTime @default(now())
 }
