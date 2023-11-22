@@ -1,0 +1,22 @@
+{
+  "name": "ImpyBot_T2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc -w",
+    "start": "nodemon dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "5.6.0",
+    "@types/node": "^20.9.4",
+    "dotenv": "^16.3.1",
+    "log4js": "^6.9.1",
+    "prisma": "^5.6.0"
+  },
+  "type": "module"
+}
