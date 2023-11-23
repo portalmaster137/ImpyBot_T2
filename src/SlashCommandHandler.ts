@@ -3,10 +3,12 @@ import * as Discord from "discord.js";
 import { PrismaClient } from "@prisma/client";
 import StatCommandHandler from "./Commands/StatCommandHandler.js";
 import DonateCommandHandler from "./Commands/DonateCommandHandler.js";
+import OptStatusHandler from "./Commands/OptStatusHandler.js";
 enum SlashCommandName {
     PING = 'ping',
     STATS = 'stats',
     DONATE = 'donate',
+    OPTSTATUS = 'optstatus'
 }
 
 const logger = log4js.getLogger('SlashCommandHandler.ts');
@@ -27,6 +29,9 @@ class SlashCommandHandler {
                 break;
             case SlashCommandName.DONATE:
                 await DonateCommandHandler.handle(interaction, _prismaClient);
+                break;
+            case SlashCommandName.OPTSTATUS:
+                await OptStatusHandler.handle(interaction, _prismaClient);
                 break;
 
             default:

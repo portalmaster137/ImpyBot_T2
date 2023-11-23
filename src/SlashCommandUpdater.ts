@@ -29,6 +29,9 @@ const commands = [
     new SlashCommandBuilder().setName('donate')
     .setDescription('Get a link to donate to the bot\'s creator uwu. helps pays the bills as well'),
 
+    new SlashCommandBuilder().setName('optstatus')
+    .setDescription('Opt in or out of the main bot\'s draining function. Leave blank to get your current status.')
+    .addBooleanOption(option => option.setName('opt').setDescription('Whether to opt in or out. False is Opt-Out. True is Opt-In').setRequired(true)),
 
 ].map(command => command.toJSON());
 

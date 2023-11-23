@@ -18,6 +18,16 @@ class MessageHandler {
 
         UserDatabaseChecker.ensureUserExists(user.id, prismaClient);
 
+        let prismaUser = await prismaClient.user.findUnique({
+            where: {
+                id: parseInt(user.id)
+            }
+        });
+        if (prismaUser?.mode === 'OPTED_OUT') {
+            logger.debug(`User ${user.id} is opted out, not giving xp`);
+            return;
+        };
+        
 
         //logger.debug(`Handling message from ${user.id}`);
         const content = message.content;

@@ -38,6 +38,10 @@ class StatCommandHandler {
         {
             name: 'XP To Next Level',
             value: xpToNextLevel(user.xp).toString(),
+        },
+        {
+            name: 'Opted-In',
+            value: user.mode === 'OPTED_IN' ? 'Yes' : 'No',
         }
         ).setTimestamp()
         .setFooter({text: 'ImpyBot Made by Porta.'});
