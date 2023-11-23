@@ -28,6 +28,14 @@ class MessageHandler {
             return;
         };
         
+        await prismaClient.user.update({
+            where: {
+                id: parseInt(user.id)
+            },
+            data: {
+                lastMessage: new Date()
+            }
+        })
 
         //logger.debug(`Handling message from ${user.id}`);
         const content = message.content;
