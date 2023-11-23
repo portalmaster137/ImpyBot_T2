@@ -26,6 +26,10 @@ const commands = [
     new SlashCommandBuilder().setName('stats').setDescription('Gets your or another user\'s stats')
     .addUserOption(option => option.setName('user').setDescription('The user to get stats for, defaults to you.').setRequired(false)),
 
+    new SlashCommandBuilder().setName('donate')
+    .setDescription('Get a link to donate to the bot\'s creator uwu. helps pays the bills as well'),
+
+
 ].map(command => command.toJSON());
 
 const rest = new REST({version: '9'}).setToken(process.env.BOT_TOKEN);

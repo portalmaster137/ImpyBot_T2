@@ -2,9 +2,11 @@ import log4js from "log4js";
 import * as Discord from "discord.js";
 import { PrismaClient } from "@prisma/client";
 import StatCommandHandler from "./Commands/StatCommandHandler.js";
+import DonateCommandHandler from "./Commands/DonateCommandHandler.js";
 enum SlashCommandName {
     PING = 'ping',
     STATS = 'stats',
+    DONATE = 'donate',
 }
 
 const logger = log4js.getLogger('SlashCommandHandler.ts');
@@ -23,6 +25,10 @@ class SlashCommandHandler {
             case SlashCommandName.STATS:
                 await StatCommandHandler.handle(interaction, _prismaClient);
                 break;
+            case SlashCommandName.DONATE:
+                await DonateCommandHandler.handle(interaction, _prismaClient);
+                break;
+
             default:
                 await interaction.reply('Unknown command');
                 logger.error(`Unknown slash command ${interaction.commandName}`);

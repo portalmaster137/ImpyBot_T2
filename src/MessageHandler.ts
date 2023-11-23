@@ -19,7 +19,7 @@ class MessageHandler {
         UserDatabaseChecker.ensureUserExists(user.id, prismaClient);
 
 
-        logger.debug(`Handling message from ${user.id}`);
+        //logger.debug(`Handling message from ${user.id}`);
         const content = message.content;
         
         //we need to check if the message is spam
@@ -56,7 +56,7 @@ class MessageHandler {
             xp += 50;
         }
 
-        logger.debug(`User ${user.id} gained ${xp} xp`);
+        //logger.debug(`User ${user.id} gained ${xp} xp`);
         try {
             await prismaClient.user.update({
                 where: {
