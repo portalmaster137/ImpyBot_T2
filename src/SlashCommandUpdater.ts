@@ -33,6 +33,10 @@ const commands = [
     .setDescription('Opt in or out of the main bot\'s draining function. Leave blank to get your current status.')
     .addBooleanOption(option => option.setName('opt').setDescription('Whether to opt in or out. False is Opt-Out. True is Opt-In').setRequired(true)),
 
+    new SlashCommandBuilder().setName('drain')
+    .setDescription('Draaaain a poor user of their precious xp~')
+    .addUserOption(option => option.setName('user').setDescription('The user to drain.').setRequired(true)),
+
 ].map(command => command.toJSON());
 
 const rest = new REST({version: '9'}).setToken(process.env.BOT_TOKEN);

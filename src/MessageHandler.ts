@@ -16,7 +16,7 @@ class MessageHandler {
 
         if (user.bot) return;
 
-        UserDatabaseChecker.ensureUserExists(user.id, prismaClient);
+        await UserDatabaseChecker.ensureUserExists(user.id, prismaClient);
 
         let prismaUser = await prismaClient.user.findUnique({
             where: {
@@ -24,7 +24,7 @@ class MessageHandler {
             }
         });
         if (prismaUser?.mode === 'OPTED_OUT') {
-            logger.debug(`User ${user.id} is opted out, not giving xp`);
+            //logger.debug(`User ${user.id} is opted out, not giving xp`);
             return;
         };
         
