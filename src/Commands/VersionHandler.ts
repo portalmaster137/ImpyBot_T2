@@ -10,8 +10,7 @@ const PATCH_VERSION = 0;
 
 class VersionHandler {
     static async handle(interaction: Discord.CommandInteraction, prismaClient: PrismaClient) {
-        await interaction.reply({
-            ephemeral: true,
+        await interaction.channel?.send({
             content: `Version ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}`
         });
     }
