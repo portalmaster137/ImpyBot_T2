@@ -10,7 +10,7 @@ logger.level = 'debug';
 class StatCommandHandler {
     static async handle(interaction: Discord.CommandInteraction, prismaClient: PrismaClient) {
         let targetUser = interaction.options.getUser('user') ?? interaction.user;
-        logger.debug(`Getting stats for ${targetUser.id}`);
+        logger.debug(`Getting stats for ${targetUser.username}`);
         await UserDatabaseChecker.ensureUserExists(targetUser.id, prismaClient);
         const user = await prismaClient.user.findUnique({
             where: {
