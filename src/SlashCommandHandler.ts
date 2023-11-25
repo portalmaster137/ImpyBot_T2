@@ -5,12 +5,14 @@ import StatCommandHandler from "./Commands/StatCommandHandler.js";
 import DonateCommandHandler from "./Commands/DonateCommandHandler.js";
 import OptStatusHandler from "./Commands/OptStatusHandler.js";
 import DrainHandler from "./Commands/DrainHandler.js";
+import VersionHandler from "./Commands/VersionHandler.js";
 enum SlashCommandName {
     PING = 'ping',
     STATS = 'stats',
     DONATE = 'donate',
     OPTSTATUS = 'optstatus',
     DRAIN = 'drain',
+    VERSION = 'version'
 }
 
 const logger = log4js.getLogger('SlashCommandHandler.ts');
@@ -38,6 +40,8 @@ class SlashCommandHandler {
             case SlashCommandName.DRAIN:
                 await DrainHandler.handle(interaction, _prismaClient);
                 break;
+            case SlashCommandName.VERSION:
+                await VersionHandler.handle(interaction, _prismaClient);
 
             default:
                 await interaction.reply('Unknown command');

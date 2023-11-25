@@ -37,6 +37,9 @@ const commands = [
     .setDescription('Draaaain a poor user of their precious xp~')
     .addUserOption(option => option.setName('user').setDescription('The user to drain.').setRequired(true)),
 
+    new SlashCommandBuilder().setName('version')
+    .setDescription('Get the current version of the bot.'),
+
 ].map(command => command.toJSON());
 
 const rest = new REST({version: '9'}).setToken(process.env.BOT_TOKEN);
