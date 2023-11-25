@@ -8,6 +8,8 @@ import MessageHandler from "./MessageHandler.js";
 const logger = log4js.getLogger('index.ts');
 logger.level = 'debug';
 
+//aaaaaaaaaa
+
 dotenv.config();
 if (!process.env.BOT_TOKEN) {
     logger.error("No token provided");
