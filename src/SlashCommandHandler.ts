@@ -42,6 +42,7 @@ class SlashCommandHandler {
                 break;
             case SlashCommandName.VERSION:
                 await VersionHandler.handle(interaction, _prismaClient);
+                break;
 
             default:
                 await interaction.reply('Unknown command');
