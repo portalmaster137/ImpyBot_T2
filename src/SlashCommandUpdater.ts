@@ -46,9 +46,15 @@ const rest = new REST({version: '9'}).setToken(process.env.BOT_TOKEN);
         logger.info('Started refreshing application (/) commands.');
 
         await rest.put(
+            Routes.applicationCommands(process.env.CLIENT_ID as string),
+            {body: []},
+        );
+
+        await rest.put(
             Routes.applicationGuildCommands(process.env.CLIENT_ID as string, process.env.GUILD_ID as string),
             {body: commands},
         );
+
 
         logger.info(`Successfully reloaded ${commands.length} application (/) commands.`);
     } catch (error) {

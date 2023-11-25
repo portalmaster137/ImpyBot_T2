@@ -2,7 +2,7 @@ import log4js from "log4js";
 import * as Discord from "discord.js";
 import { PrismaClient } from "@prisma/client";
 import UserDatabaseChecker from "../UserDatabaseChecker.js";
-const logger = log4js.getLogger('OptStatusHandler.ts');
+const logger = log4js.getLogger('DrainHandler.ts');
 logger.level = 'debug';
 
 class DrainHandler {

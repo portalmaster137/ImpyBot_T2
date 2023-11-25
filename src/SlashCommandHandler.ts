@@ -10,7 +10,7 @@ enum SlashCommandName {
     STATS = 'stats',
     DONATE = 'donate',
     OPTSTATUS = 'optstatus',
-    DRAIN = 'drain'
+    DRAIN = 'drain',
 }
 
 const logger = log4js.getLogger('SlashCommandHandler.ts');
