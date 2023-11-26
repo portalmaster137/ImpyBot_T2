@@ -3,17 +3,16 @@ import * as Discord from "discord.js";
 import { PrismaClient } from "@prisma/client";
 const logger = log4js.getLogger('DrainHandler.ts');
 logger.level = 'debug';
+import * as ChildProcess from "child_process";
 
 const MAJOR_VERSION = 1;
 const MINOR_VERSION = 1;
-const PATCH_VERSION = 2;
+const PATCH_VERSION = 3;
 
 class VersionHandler {
     static async handle(interaction: Discord.CommandInteraction, prismaClient: PrismaClient) {
 
-        const ghash = await import('child_process').then((childProcess) => {
-            return childProcess.execSync('git rev-parse HEAD').toString().trim();
-        });
+        const ghash = ChildProcess.execSync('git rev-parse HEAD').toString().trim();
 
         await interaction.reply({
             ephemeral: true,
