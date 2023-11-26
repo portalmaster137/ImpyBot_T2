@@ -15,43 +15,45 @@ class LeaderboardHandler {
             take: 5
         });
 
-        //we need to get the usernames of the users, but all we have is their id
+        let users: { name: string, value: string }[] = [];
 
-        const users = await Promise.all(topUsers.map(async (user) => {
-            const nickname = await interaction.client.users.cache.get(user.id.toString())?.username;
-            return {
-                username: nickname ?? 'Unknown',
-                xp: user.xp
+        topUsers.forEach(async (user) => {
+            let username = await interaction.client.users.cache.filter(u => u.id === user.id.toString()).first()?.username;
+            if (username === undefined) {
+                username = 'Unknown';
             }
-        }));
-
-        //make a pretty embed
+            users.push({
+                name: username,
+                value: user.xp.toString()
+            })
+        })
 
         const embed = new Discord.EmbedBuilder()
             .setTitle('Top 5 Users')
             .setDescription('The top 5 users by total XP')
             .setColor(0x00FF00)
-            .setFields({
-                name: '1st',
-                value: `${users[0].username} - ${users[0].xp} XP`
-            },
-            {
-                name: '2nd',
-                value: `${users[1].username} - ${users[1].xp} XP`
-            },
-            {
-                name: '3rd',
-                value: `${users[2].username} - ${users[2].xp} XP`
-            },
-            {
-                name: '4th',
-                value: `${users[3].username} - ${users[3].xp} XP`
-            },
-            {
-                name: '5th',
-                value: `${users[4].username} - ${users[4].xp} XP`
-            
-            })
+            .setFields(
+                {
+                    name: 'First Place',
+                    value: users[0].name + ' - ' + users[0].value
+                },
+                {
+                    name: 'Second Place',
+                    value: users[1].name + ' - ' + users[1].value
+                },
+                {
+                    name: 'Third Place',
+                    value: users[2].name + ' - ' + users[2].value
+                },
+                {
+                    name: 'Fourth Place',
+                    value: users[3].name + ' - ' + users[3].value
+                },
+                {
+                    name: 'Fifth Place',
+                    value: users[4].name + ' - ' + users[4].value
+                }
+            )
             .setTimestamp()
             .setFooter({
                 text: 'ImpyBot Made by Porta.'
