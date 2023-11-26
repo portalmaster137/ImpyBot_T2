@@ -15,7 +15,7 @@ enum SlashCommandName {
     OPTSTATUS = 'optstatus',
     DRAIN = 'drain',
     VERSION = 'version',
-    LOCK = 'lock'
+    LOCK = 'lock_user'
 }
 
 const logger = log4js.getLogger('SlashCommandHandler.ts');
