@@ -8,6 +8,7 @@ import DrainHandler from "./Commands/DrainHandler.js";
 import VersionHandler from "./Commands/VersionHandler.js";
 import UserDatabaseChecker from "./UserDatabaseChecker.js";
 import LockHandler from "./Commands/LockHandler.js";
+import LeaderboardHandler from "./Commands/LeaderboardHandler.js";
 enum SlashCommandName {
     PING = 'ping',
     STATS = 'stats',
@@ -15,7 +16,8 @@ enum SlashCommandName {
     OPTSTATUS = 'optstatus',
     DRAIN = 'drain',
     VERSION = 'version',
-    LOCK = 'lock_user'
+    LOCK = 'lock_user',
+    LEADERBOARD = 'leaderboard'
 }
 
 const logger = log4js.getLogger('SlashCommandHandler.ts');
@@ -62,6 +64,9 @@ class SlashCommandHandler {
                 break;
             case SlashCommandName.LOCK:
                 await LockHandler.handle(interaction, _prismaClient);
+                break;
+            case SlashCommandName.LEADERBOARD:
+                await LeaderboardHandler.handle(interaction, _prismaClient);
                 break;
 
             default:
