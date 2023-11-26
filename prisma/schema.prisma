@@ -22,4 +22,5 @@ model User {
   xp        BigInt @default(0)
   createdAt DateTime @default(now())
   lastMessage DateTime @default(now())
+  locked    Boolean @default(false)
 }

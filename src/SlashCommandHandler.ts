@@ -6,6 +6,7 @@ import DonateCommandHandler from "./Commands/DonateCommandHandler.js";
 import OptStatusHandler from "./Commands/OptStatusHandler.js";
 import DrainHandler from "./Commands/DrainHandler.js";
 import VersionHandler from "./Commands/VersionHandler.js";
+import UserDatabaseChecker from "./UserDatabaseChecker.js";
 enum SlashCommandName {
     PING = 'ping',
     STATS = 'stats',
@@ -22,6 +23,19 @@ class SlashCommandHandler {
 
     static async HandleSlashCommand(_interaction: any, _prismaClient: PrismaClient) {
         const interaction = _interaction as Discord.CommandInteraction;
+        
+        await UserDatabaseChecker.ensureUserExists(interaction.user.id, _prismaClient);
+        let user = await _prismaClient.user.findUnique({
+            where: {
+                id: parseInt(interaction.user.id)
+            }
+        })
+        if (user?.locked === true) {
+            logger.debug(`User ${interaction.user.id} is locked, not handling slash command ${interaction.commandName}`);
+            await interaction.reply('You are locked out of using ImpyBot. Please contact an admin to get this resolved.');
+            return;
+        }
+
 
         logger.debug(`Handling slash command ${interaction.commandName}`);
         switch (interaction.commandName) {

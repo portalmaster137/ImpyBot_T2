@@ -23,7 +23,7 @@ class MessageHandler {
                 id: parseInt(user.id)
             }
         });
-        if (prismaUser?.mode === 'OPTED_OUT') {
+        if (prismaUser?.mode === 'OPTED_OUT' || prismaUser?.locked === true) {
             //logger.debug(`User ${user.id} is opted out, not giving xp`);
             return;
         };

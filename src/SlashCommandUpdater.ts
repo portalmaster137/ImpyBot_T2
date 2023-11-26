@@ -40,6 +40,14 @@ const commands = [
     new SlashCommandBuilder().setName('version')
     .setDescription('Get the current version of the bot.'),
 
+    new SlashCommandBuilder().setName('lock_user')
+    .setDescription('Lock a user from all bot functions.').setDefaultMemberPermissions(8)
+    .addUserOption(option => option.setName('user').setDescription('The user to lock.').setRequired(true))
+    .addBooleanOption(option => option.setName('lock').setDescription('Whether to lock or unlock the user.').setRequired(true)),
+
+    new SlashCommandBuilder().setName('leaderboard')
+    .setDescription('Get the leaderboard for the server.'),
+
 ].map(command => command.toJSON());
 
 const rest = new REST({version: '9'}).setToken(process.env.BOT_TOKEN);
