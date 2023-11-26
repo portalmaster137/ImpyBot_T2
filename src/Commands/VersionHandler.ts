@@ -6,7 +6,7 @@ logger.level = 'debug';
 
 const MAJOR_VERSION = 1;
 const MINOR_VERSION = 1;
-const PATCH_VERSION = 1;
+const PATCH_VERSION = 2;
 
 class VersionHandler {
     static async handle(interaction: Discord.CommandInteraction, prismaClient: PrismaClient) {
