@@ -10,9 +10,14 @@ const PATCH_VERSION = 1;
 
 class VersionHandler {
     static async handle(interaction: Discord.CommandInteraction, prismaClient: PrismaClient) {
+
+        const ghash = await import('child_process').then((childProcess) => {
+            return childProcess.execSync('git rev-parse HEAD').toString().trim();
+        });
+
         await interaction.reply({
             ephemeral: true,
-            content: `Version ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}`
+            content: `Version ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}\nGit hash: ${ghash}`
         });
     }
 }
