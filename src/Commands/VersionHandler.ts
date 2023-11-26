@@ -5,7 +5,7 @@ const logger = log4js.getLogger('DrainHandler.ts');
 logger.level = 'debug';
 
 const MAJOR_VERSION = 1;
-const MINOR_VERSION = 0;
+const MINOR_VERSION = 1;
 const PATCH_VERSION = 0;
 
 class VersionHandler {
