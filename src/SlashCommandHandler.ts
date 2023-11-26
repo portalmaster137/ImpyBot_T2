@@ -32,7 +32,8 @@ class SlashCommandHandler {
                 id: parseInt(interaction.user.id)
             }
         })
-        if (user?.locked === true) {
+        const isUserAdmin = interaction.member?.permissions as Readonly<Discord.PermissionsBitField>;
+        if (user?.locked === true && !isUserAdmin.has(Discord.PermissionFlagsBits.Administrator)) {
             logger.debug(`User ${interaction.user.id} is locked, not handling slash command ${interaction.commandName}`);
             await interaction.reply('You are locked out of using ImpyBot. Please contact an admin to get this resolved.');
             return;
