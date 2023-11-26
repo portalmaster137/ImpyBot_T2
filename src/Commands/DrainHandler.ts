@@ -84,10 +84,15 @@ class DrainHandler {
         const GiveInButton = new Discord.ButtonBuilder()
         .setCustomId('givein')
         .setLabel('Give In...~')
+        .setStyle(Discord.ButtonStyle.Secondary);
+
+        const FullDrainButton = new Discord.ButtonBuilder()
+        .setCustomId('fulldrain')
+        .setLabel('Full Drain~~~')
         .setStyle(Discord.ButtonStyle.Danger);
 
         const row = new Discord.ActionRowBuilder<Discord.ButtonBuilder>()
-        .addComponents(ResistButton, GiveInButton);
+        .addComponents(ResistButton, GiveInButton, FullDrainButton);
 
         logger.info(`Drain attempt from ${executingUser.id} to ${targetUser.id}`);
 
@@ -133,7 +138,35 @@ class DrainHandler {
                     components: []
                 });
 
+            } else if (confirmation.customId === 'fulldrain') {
+                const xpToDrain = parseInt(targetUserPrisma.xp.toString());
+                await prismaClient.user.update({
+                    where: {
+                        id: parseInt(targetUser.id)
+                    },
+                    data: {
+                        xp: 0
+                    }
+                });
+                //add the xp to the executing user
+                await prismaClient.user.update({
+                    where: {
+                        id: parseInt(executingUser.id)
+                    },
+                    data: {
+                        xp: parseInt(executingUserPrisma.xp.toString()) + xpToDrain
+                    }
+                });
+
+                //update the message
+                await confirmation.update({
+                    content: `${executingUser.username} has drained <@${targetUser.id}> of all their xp~!`,
+                    components: []
+                });
+
             }
+
+
         } catch (e) {
             //if the user doesn't respond in 60 seconds, the drain goes through~
             //drain the user of 1/5 of their xp though, since they didn't give in
