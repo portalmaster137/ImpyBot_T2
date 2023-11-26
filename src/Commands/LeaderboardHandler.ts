@@ -56,6 +56,10 @@ class LeaderboardHandler {
             .setFooter({
                 text: 'ImpyBot Made by Porta.'
             });
+
+        await interaction.reply({
+            embeds: [embed]
+        })
     }
 }
 
