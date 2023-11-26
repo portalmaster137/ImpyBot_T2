@@ -26,7 +26,7 @@ class StatCommandHandler {
 
         const embed = new Discord.EmbedBuilder()
         .setTitle(`${targetUser.username}'s stats`)
-        .setImage(targetUser.avatarURL() ?? '')
+        .setImage(targetUser.avatarURL() ?? 'https://cdn.discordapp.com/attachments/1178370064509055007/1178385205334130748/Screenshot_2023-11-22_075217.png')
         .addFields({
             name: 'XP',
             value: user.xp.toString(),
