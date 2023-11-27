@@ -18,13 +18,28 @@ enum SlashCommandName {
     LOCK = 'lock_user'
 }
 
+const AuthedChannels = [
+    1174808789027934339,
+    1173382556842995803
+]
+
 const logger = log4js.getLogger('SlashCommandHandler.ts');
 logger.level = 'debug';
 
 class SlashCommandHandler {
 
     static async HandleSlashCommand(_interaction: any, _prismaClient: PrismaClient) {
+        
         const interaction = _interaction as Discord.CommandInteraction;
+
+        if (!AuthedChannels.includes(parseInt(interaction.channelId))) {
+            logger.debug(`User ${interaction.user.id} tried to use slash command ${interaction.commandName} in channel ${interaction.channelId}`);
+            await interaction.reply({
+                ephemeral: true,
+                content: 'You cannot use this command in this channel.'
+            });
+            return;
+        }
         
         await UserDatabaseChecker.ensureUserExists(interaction.user.id, _prismaClient);
         let user = await _prismaClient.user.findUnique({
